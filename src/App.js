@@ -17,7 +17,7 @@ function App() {
   const [user, setUser] = useState({});
   const [search, setSearch] = useState('');
   const [validUser, setValidUser] = useState(false);
-  const url = process.env.BASE_URL;
+  const url = 'https://dgeding-task-manager.herokuapp.com';
   const { width } = useWindowSize();
 
   useEffect(() => {
