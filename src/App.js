@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';
 import api from './api/axios';
+const url = 'https://dgeding-task-manager.herokuapp.com';
 
 function App() {
   const userToken = localStorage.getItem("userToken");
@@ -17,7 +18,8 @@ function App() {
   const [user, setUser] = useState({});
   const [search, setSearch] = useState('');
   const [validUser, setValidUser] = useState(false);
-  const url = 'https://dgeding-task-manager.herokuapp.com';
+  const avatar_url = `${url}/users/${user._id}/avatar`;
+  const [imageSrc, setImageSrc]  = useState(avatar_url)
   const { width } = useWindowSize();
 
   useEffect(() => {
@@ -88,9 +90,12 @@ function App() {
         {validUser && (
         <Route exact path="/profile" element={<Profile
                                               user={user}
+                                              imageSrc={imageSrc}
+                                              setImageSrc={setImageSrc}
                                               setUser={setUser}
                                               token={token}
                                               url={url}
+                                              avatar_url={avatar_url}
                                             />}
         /> )}
         {validUser && (

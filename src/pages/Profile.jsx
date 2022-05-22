@@ -4,10 +4,8 @@ import Default from '../assets/default.png';
 import api from '../api/axios';
 import SelectFileButton from '../components/SelectFileButton';
 
-const Profile = ({ user, setUser, token, url }) => {
-        const avatar_url = `${url}/users/${user._id}/avatar`;
+const Profile = ({ user, setUser, token, url, imageSrc, setImageSrc }) => {
         const [menu, setMenu] = useState(false);
-        const [imageSrc, setImageSrc]  = useState(avatar_url)
         const navigate = useNavigate();
 
         useEffect(() => {

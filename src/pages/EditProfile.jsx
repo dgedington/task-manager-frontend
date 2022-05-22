@@ -16,6 +16,7 @@ const EditProfile = ({ user, setUser, token, url }) => {
     const emailRef = useRef();
     const errRef = useRef();
     const UPDATE_URL = `${url}/users/me`;
+    console.log(UPDATE_URL)
     const navigate = useNavigate();
     
     const [userName, setUserName] = useState(user.name);
@@ -63,7 +64,6 @@ const EditProfile = ({ user, setUser, token, url }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate("/profile");
         // if button enabled with JS hack
         const v1 = USER_REGEX.test(userName);
         const v2 = PWD_REGEX.test(pwd);
@@ -93,7 +93,8 @@ const EditProfile = ({ user, setUser, token, url }) => {
 
         try {
             const response = await axios(config);
-            setUser(response.data);
+            setUser(response.data.user);
+            navigate("/profile");
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
