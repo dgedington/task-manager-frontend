@@ -64,6 +64,7 @@ const EditProfile = ({ user, setUser, token, url }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // navigate("/profile");
         // if button enabled with JS hack
         const v1 = USER_REGEX.test(userName);
         const v2 = PWD_REGEX.test(pwd);
@@ -104,8 +105,6 @@ const EditProfile = ({ user, setUser, token, url }) => {
             }
             errRef.current.focus();
         }
-
-        navigate("/profile");
     }
 
   return (<React.Fragment>
