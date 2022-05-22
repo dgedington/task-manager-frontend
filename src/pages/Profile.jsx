@@ -14,7 +14,6 @@ const Profile = ({ user, setUser, token, url, imageSrc, setImageSrc }) => {
                 try {
                     const response = await api.get('/users/me', { headers: { 'Authorization': `Bearer ${token}`}} )
                     setUser(response.data);
-                    setImageSrc(avatar_url)
                 } catch (err) {
                     console.log(err)
                 }
@@ -23,6 +22,10 @@ const Profile = ({ user, setUser, token, url, imageSrc, setImageSrc }) => {
             fetchProfile();
 
         }, [user, setUser, token])
+
+        useEffect(() => {
+            setImageSrc(avatar_url);
+        }, [imageSrc, setImageSrc])
 
         return (<React.Fragment>
             <div className='flex flex-col w-screen h-screen items-center justify-start align-middle'>
