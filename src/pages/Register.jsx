@@ -85,10 +85,11 @@ const Register = ({ setToken, validUser, setValidUser, setUser, url }) => {
 
         try {
             const response = await axios(config);
-            const userToken = JSON.stringify(response.data.token);
-            localStorage.setItem("userToken", response.data.token);
-            setToken(userToken);
+            localStorage.setItem("userEmail", email);
+            localStorage.setItem("password", pwd);
             setUser(response.data.user);
+            setToken(response.data.token);
+            localStorage.setItem("userToken", response.data.token);
             setValidUser(true);
             //clear state and controlled inputs
             //need value attrib on inputs for this
