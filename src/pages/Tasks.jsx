@@ -25,7 +25,7 @@ const Tasks = ({ token, url, search }) => {
 
     fetchTasks();
 
-})
+}, [tasks, setTasks, token])
 
 const handleCheck = async (id, token, url) => {
   const listTasks = tasks.map((task) => task._id === id ? { ...task, completed: !task.completed } : task);

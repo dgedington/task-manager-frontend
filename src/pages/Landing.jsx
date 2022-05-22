@@ -31,6 +31,7 @@ const Landing = ({ validUser, setValidUser, user, token, setToken, url }) => {
         localStorage.removeItem("userToken");
         setToken('');
         setValidUser(false);
+        navigate("/");
       }).catch (error => {
         console.log(error)
       })  

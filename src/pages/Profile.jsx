@@ -4,7 +4,7 @@ import Default from '../assets/default.png';
 import api from '../api/axios';
 import SelectFileButton from '../components/SelectFileButton';
 
-const Profile = ({ user, setUser, token, url, avatar, setAvatar }) => {
+const Profile = ({ user, setUser, setValidUser, token, avatar, setAvatar, url }) => {
         const [menu, setMenu] = useState(false);
         const navigate = useNavigate();
 
@@ -13,14 +13,17 @@ const Profile = ({ user, setUser, token, url, avatar, setAvatar }) => {
                 try {
                     const response = await api.get('/users/me', { headers: { 'Authorization': `Bearer ${token}`}} )
                     setUser(response.data);
+                    setAvatar(`${url}/users/${user._id}/avatar`);
                 } catch (err) {
                     console.log(err)
+                    setValidUser(false)
+                    navigate("/");
                 }
             } 
 
             fetchProfile();
 
-        }, [user, setUser, token])
+        }, [user, setUser, token, navigate, setAvatar, setValidUser, url])
 
         return (<React.Fragment>
             <div className='flex flex-col w-screen h-screen items-center justify-start align-middle'>

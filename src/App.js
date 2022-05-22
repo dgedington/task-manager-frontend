@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Landing from './pages/Landing';
@@ -9,7 +9,7 @@ import Nav from './components/Nav';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';
-import api from './api/axios';
+
 const url = 'https://dgeding-task-manager.herokuapp.com';
 
 function App() {
@@ -20,23 +20,6 @@ function App() {
   const [validUser, setValidUser] = useState(false);
   const { width } = useWindowSize();
   const [avatar, setAvatar] = useState('Default');
-
-  useEffect(() => {
-    if (userToken) {
-      setValidUser(true);
-      const fetchProfile = async () => {
-        try {
-          const response = await api.get('/users/me', { headers: { 'Authorization': `Bearer ${token}`}} )
-          setUser(response.data);
-          setAvatar(`${url}/users/${user._id}/avatar`);
-        } catch (err) {
-          console.log(err)
-        }
-      } 
-
-      fetchProfile();
-    }
-  }, [token, userToken, avatar, setAvatar, user])
 
   return (
     <main className='w-screen h-screen'>
@@ -90,10 +73,11 @@ function App() {
         {validUser && (
         <Route exact path="/profile" element={<Profile
                                               user={user}
+                                              setUser={setUser}
+                                              setValidUser={setValidUser}
+                                              token={token}
                                               avatar={avatar}
                                               setAvatar={setAvatar}
-                                              setUser={setUser}
-                                              token={token}
                                               url={url}
                                             />}
         /> )}
