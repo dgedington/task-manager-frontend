@@ -18,8 +18,7 @@ function App() {
   const [user, setUser] = useState({});
   const [search, setSearch] = useState('');
   const [validUser, setValidUser] = useState(false);
-  const avatar_url = `${url}/users/${user._id}/avatar`;
-  const [imageSrc, setImageSrc]  = useState(avatar_url)
+  const [imageSrc, setImageSrc]  = useState(null)
   const { width } = useWindowSize();
 
   useEffect(() => {
@@ -95,7 +94,6 @@ function App() {
                                               setUser={setUser}
                                               token={token}
                                               url={url}
-                                              avatar_url={avatar_url}
                                             />}
         /> )}
         {validUser && (

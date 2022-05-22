@@ -7,12 +7,14 @@ import SelectFileButton from '../components/SelectFileButton';
 const Profile = ({ user, setUser, token, url, imageSrc, setImageSrc }) => {
         const [menu, setMenu] = useState(false);
         const navigate = useNavigate();
+        const avatar_url = `${url}/users/${user._id}/avatar`;
 
         useEffect(() => {
             const fetchProfile = async () => {
                 try {
                     const response = await api.get('/users/me', { headers: { 'Authorization': `Bearer ${token}`}} )
                     setUser(response.data);
+                    setImageSrc(avatar_url)
                 } catch (err) {
                     console.log(err)
                 }

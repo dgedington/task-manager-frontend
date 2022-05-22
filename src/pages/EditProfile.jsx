@@ -94,7 +94,6 @@ const EditProfile = ({ user, setUser, token, url }) => {
         try {
             const response = await axios(config);
             setUser(response.data.user);
-            navigate("/profile");
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -105,6 +104,8 @@ const EditProfile = ({ user, setUser, token, url }) => {
             }
             errRef.current.focus();
         }
+
+        navigate("/profile");
     }
 
   return (<React.Fragment>
