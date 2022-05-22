@@ -94,7 +94,7 @@ const EditProfile = ({ user, setUser, token, url }) => {
 
         try {
             const response = await axios(config);
-            setUser(response.data.user);
+            setUser(response.data);
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
