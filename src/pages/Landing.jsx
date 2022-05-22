@@ -35,6 +35,10 @@ const Landing = ({ validUser, setValidUser, user, token, setToken, url }) => {
         console.log(error)
       })  
     }
+   
+  const handleDelete = () => {
+    console.log('Click Click')
+  }  
 
 
 
@@ -49,8 +53,10 @@ const Landing = ({ validUser, setValidUser, user, token, setToken, url }) => {
           {validUser === false && (<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-4 rounded focus:outline-none focus:shadow-outline" onClick={() => navigate("/login")}>Login</button>)}
           {validUser === false && (<p className='mb-2' >Create account now.</p>)}
           {validUser === false && (<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={() => navigate("/register")}>Register</button>)}
-          {validUser === true && (<p className='mb-2' >Sign out here.</p>)}
-          {validUser === true && (<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline" onClick={handleClick} >Logout</button> )}
+          {validUser === true && (<p className='mb-2' >Sign out here</p>)}
+          {validUser === true && (<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline mb-2" onClick={handleClick} >Logout</button> )}
+          {validUser === true && (<p className='mb-2' >Delete Account</p>)}
+          {validUser === true && (<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline" onClick={handleDelete} >Delete</button> )}
         </div>
     </React.Fragment>
   )

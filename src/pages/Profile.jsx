@@ -4,10 +4,9 @@ import Default from '../assets/default.png';
 import api from '../api/axios';
 import SelectFileButton from '../components/SelectFileButton';
 
-const Profile = ({ user, setUser, token, url, imageSrc, setImageSrc }) => {
+const Profile = ({ user, setUser, token, url, avatar, setAvatar }) => {
         const [menu, setMenu] = useState(false);
         const navigate = useNavigate();
-        const avatar_url = `${url}/users/${user._id}/avatar`;
 
         useEffect(() => {
             const fetchProfile = async () => {
@@ -23,14 +22,10 @@ const Profile = ({ user, setUser, token, url, imageSrc, setImageSrc }) => {
 
         }, [user, setUser, token])
 
-        useEffect(() => {
-            setImageSrc(avatar_url);
-        }, [imageSrc, setImageSrc])
-
         return (<React.Fragment>
             <div className='flex flex-col w-screen h-screen items-center justify-start align-middle'>
                 <div className="flex flex-col bg-blue-500 shadow-md rounded px-8 pt-6 pb-8 mt-8 mb-4 align-center">
-                <img className="mb-4" src={imageSrc} onError={() => setImageSrc(Default)} alt='user'/>
+                <img className="mb-4" src={avatar} onError={() => setAvatar(Default)} alt='user'/>
                     <h1 className='text-4xl mb-4' ><strong>{user.name}</strong></h1>
                     <p><strong>User Id:</strong> {user._id}</p>
                     <p><strong>Age:</strong> {user.age}</p>
@@ -48,10 +43,10 @@ const Profile = ({ user, setUser, token, url, imageSrc, setImageSrc }) => {
                     <SelectFileButton
                         url={url}
                         token={token}
-                        user={setImageSrc}
+                        user={user}
                         menu={menu}
                         setMenu={setMenu}
-                        setImageSrc={setImageSrc}
+                        setAvatar={setAvatar}
                     />
                 </div>
                 )}

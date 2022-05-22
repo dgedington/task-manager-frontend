@@ -18,8 +18,8 @@ function App() {
   const [user, setUser] = useState({});
   const [search, setSearch] = useState('');
   const [validUser, setValidUser] = useState(false);
-  const [imageSrc, setImageSrc]  = useState(null)
   const { width } = useWindowSize();
+  const [avatar, setAvatar] = useState('Default');
 
   useEffect(() => {
     if (userToken) {
@@ -28,6 +28,7 @@ function App() {
         try {
           const response = await api.get('/users/me', { headers: { 'Authorization': `Bearer ${token}`}} )
           setUser(response.data);
+          setAvatar(`${url}/users/${user._id}/avatar`);
         } catch (err) {
           console.log(err)
         }
@@ -35,7 +36,7 @@ function App() {
 
       fetchProfile();
     }
-  }, [token, userToken])
+  }, [token, userToken, avatar, setAvatar, user])
 
   return (
     <main className='w-screen h-screen'>
@@ -89,8 +90,8 @@ function App() {
         {validUser && (
         <Route exact path="/profile" element={<Profile
                                               user={user}
-                                              imageSrc={imageSrc}
-                                              setImageSrc={setImageSrc}
+                                              avatar={avatar}
+                                              setAvatar={setAvatar}
                                               setUser={setUser}
                                               token={token}
                                               url={url}

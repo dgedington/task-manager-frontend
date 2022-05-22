@@ -10,12 +10,14 @@ const Tasks = ({ token, url, search }) => {
   const [editTask, setEditTask] = useState('');
   const [editTaskId, setEditTaskId] = useState('');
   const [showEdit, setShowEdit] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchTasks = async () => {
         try {
-            const response = await api.get('/tasks?sortBy=createdAt:desc', { headers: { 'Authorization': `Bearer ${token}`}} )
+            const response = await api.get('/tasks', { headers: { 'Authorization': `Bearer ${token}`}} )
             setTasks(response.data);
+            setIsLoading(false);
         } catch (err) {
             console.log(err)
         }
@@ -176,7 +178,8 @@ const handleSearch = () => {
     </button>
   </form>
 </div>) }
-        {tasks.length ? (
+        {isLoading && <p>Loading Items...</p>}
+        {(tasks.length !== 0 && isLoading === false) && (
         <ItemList
           tasks={handleSearch()}
           token={token}
@@ -187,12 +190,11 @@ const handleSearch = () => {
           setEditTask={setEditTask}
           setEditTaskId={setEditTaskId}       
         />
-    ): (
+    )} { (tasks.length === 0 && isLoading === false) && (
       <p className='mt-2'>Your task list is empty.</p>
   )}
   </div>
     </React.Fragment>
-  )
-}
+)}
 
 export default Tasks
